@@ -1,0 +1,228 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8"/>
+    <meta
+            name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>VENUS</title>
+    <script
+            src="https://kit.fontawesome.com/2185f713f9.js"
+            crossorigin="anonymous"
+    ></script>
+    <link rel="icon" href="{% static 'news/Images/logo.png' %}">
+    <link rel="stylesheet" href="{% static 'news/css/main.css' %}"/>
+</head>
+
+<body>
+<a href="#top"><img class="to-top-arrow" src="{% static 'news/Images/carousel-arrow-dark.png' %}" alt="to top"
+                    title="برو به بالا"/></a>
+<nav class="fixed-nav">
+    <input type="checkbox" id="check-nav" hidden/>
+    <div class="hamburger-menu">
+        <label for="check-nav" class="menu-lines">
+            <div class="menu-line menu-line-1"></div>
+            <div class="menu-line menu-line-2"></div>
+            <div class="menu-line menu-line-3"></div>
+        </label>
+    </div>
+    <div class="menu">
+        <ul class="menu-items">
+            <li>
+                <a href="login.html"
+                ><i class="fas fa-user"></i> ورود به حساب کاربری</a
+                >
+            </li>
+            <li>
+                <a href="sign-in.html"><i class="fas fa-user-plus"></i> ایجاد حساب کاربری</a>
+            </li>
+            <li>
+                <hr/>
+            </li>
+            <li>
+                <a href="home.html"><i class="fas fa-home"></i> صفحه اصلی</a>
+            </li>
+            <li>
+                <a href="news-list.html"
+                ><i class="fas fa-bullhorn"></i> لیست اخبار</a
+                >
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<nav id="main-nav">
+    <div class="container">
+        <div class="nav-title">
+            <a href="home.html"><img src="{% static 'news/Images/logo.png' %}" class="logo" id="top" alt="logo"/></a>
+            <a href="home.html"><p class="main-title">VENUS</p></a>
+        </div>
+        <ul>
+            <li>
+                <a class="active-page" href="home.html"
+                ><i class="fas fa-home"></i> صفحه اصلی</a
+                >
+            </li>
+            <li>
+                <a href="news-list.html"><i class="fas fa-bullhorn"></i> لیست اخبار</a
+                >
+            </li>
+        </ul>
+        <div class="nav-left-side">
+            <div class="search-box">
+                <form>
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="search" placeholder="جستجو"/>
+                </form>
+            </div>
+            <a href="login.html" class="nav-left-icon" title="ورود به حساب کاربری"
+            ><i class="fas fa-user-circle"></i
+            ></a>
+        </div>
+    </div>
+</nav>
+
+<header>
+    <div class="container">
+        <div class="showcase-container">
+            <div class="slideshow-container">
+                <div class="slideshow">
+                    {% if slider_post %}
+                        {% for post in slider_post %}
+                            <div class="mySlides fade">
+                                <div class="numbertext">3 / {{ forloop.counter }}</div>
+                                <a href="#"><img src="{{ post.image.url }}" style="width:100%"></a>
+                                <a href="#" class="text">{{ post.title }}</a>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                </div>
+                <div style="text-align:center">
+                    <span class="dot" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                    <span class="dot" onclick="currentSlide(3)"></span>
+                </div>
+            </div>
+
+            <div class="cards-container">
+                {% if slider_post %}
+                    {% for post in slider_post %}
+                        <article class="card">
+                            <div class="card-image-container">
+                                <a href="news-page.html"><img src="{{ post.image.url }}"
+                                                              title="{{ post.title }}"/></a>
+                            </div>
+                            <div class="card-text-side">
+                                <a href="news-page.html" class="card-title"><h3>{{ post.title }}</h3></a>
+                                <a href="news-page.html" class="card-text"><p>
+                                    {{ post.text|truncatewords:20 | safe }}
+                                </p></a>
+                            </div>
+                        </article>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</header>
+<div style="height: 100px; overflow: hidden">
+    <svg
+            viewBox="0 0 500 150"
+            preserveAspectRatio="none"
+            style="height: 100%; width: 100%"
+    >
+        <path
+                d="M0.00,49.98 C149.99,150.00 349.20,-49.98 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"
+                style="stroke: none; fill: #f0f0f0"
+        ></path>
+    </svg>
+</div>
+<main>
+    <div class="container">
+        <div class="main-container">
+            <section class="cards-container">
+                {#                <article class="card">#}
+                {#                    <div class="card-image-container">#}
+                {#                        <a href="news-page.html"><img src="../images/political.jpg" alt="political"#}
+                {#                                                      title="لورم ایپسوم"/></a>#}
+                {#                    </div>#}
+                {#                    <div class="card-text-side">#}
+                {#                        <a href="news-page.html" class="card-title"><h2>لورم ایپسوم</h2></a>#}
+                {#                        <a href="news-page.html" class="card-text"><p>#}
+                {#                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با#}
+                {#                            استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و#}
+                {#                            مجله در ستون و سطرآنچنان که لازم است#}
+                {#                        </p></a>#}
+                {#                    </div>#}
+                {#                </article>#}
+
+            </section>
+            <aside>
+                {#                top 5 view#}
+                {#                5 last post#}
+            </aside>
+        </div>
+    </div>
+</main>
+
+<div style="height: 100px; overflow: hidden">
+    <svg
+            viewBox="0 0 500 150"
+            preserveAspectRatio="none"
+            style="height: 100%; width: 100%"
+    >
+        <path
+                d="M0.00,49.98 C149.99,150.00 271.49,-49.98 500.00,49.98 L500.00,0.00 L0.00,0.00 Z"
+                style="stroke: none; fill: #f0f0f0"
+        ></path>
+    </svg>
+</div>
+
+<div style="height: 150px; overflow: hidden">
+    <svg
+            viewBox="0 0 500 150"
+            preserveAspectRatio="none"
+            style="height: 100%; width: 100%"
+    >
+        <path
+                d="M0.00,49.98 C149.99,150.00 349.20,-49.98 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"
+                style="stroke: none; fill: #2d3032"
+        ></path>
+    </svg>
+</div>
+
+<footer>
+    <div class="container">
+        <div class="main-footer-container">
+            <div class="nav-title">
+                <a href="home.html"><img src="{% static 'news/Images/logo.png' %}" class="logo" alt="logo"/></a>
+                <a href="home.html"><p class="main-title">VENUS</p></a>
+            </div>
+            <div class="parts-menu">
+                <ul>
+                    <li><a href="news-list.html">لیست اخبار</a></li>
+                    <li><a href="#">ثبت نام</a></li>
+                    <li><a href="#">ورود به حساب کاربری</a></li>
+                </ul>
+            </div>
+            <div class="icons">
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+        <div class="copyright">
+            © استفاده از مطالب سایت تنها با درج لینک مستقیم به آن مطلب مجاز است.
+        </div>
+    </div>
+</footer>
+</body>
+<script src="{% static "news/js/slide_show.js" %}"></script>
+</html>

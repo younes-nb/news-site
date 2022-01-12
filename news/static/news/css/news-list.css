@@ -1,0 +1,131 @@
+html {
+    font-size: 15px;
+}
+
+.title {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    font-family: var(--font-yekan);
+}
+
+#main-nav {
+    margin-bottom: 0.6rem;
+}
+
+.main-container {
+    grid-template-columns: repeat(5, 1fr) !important;
+    grid-gap: 2rem !important;
+}
+
+.cards-container {
+    grid-column: span 3 !important;
+}
+
+aside {
+    grid-column: span 2 !important;
+}
+
+.card-image-container {
+    grid-column: span 3 !important;
+}
+
+.card-text-side {
+    grid-column: span 4 !important;
+}
+
+#side-news .side-title {
+    font-size: 1.3rem;
+    border-radius: 5px;
+    margin-bottom: 2rem;
+    text-align: center;
+    background-color: var(--secondary-color);
+}
+
+@media (max-width: 1300px) {
+    aside .card {
+        padding: 10px !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    aside .card-image-container {
+        grid-column: span 1 !important;
+    }
+
+    aside .card-text-side {
+        grid-column: span 1 !important;
+    }
+
+    aside .card-text {
+        font-size: 0.9rem !important;
+    }
+}
+
+@media (max-width: 1125px) {
+    .main-container {
+        grid-template-columns: 1fr !important;
+        grid-gap: 0 !important;
+    }
+
+    .side-title {
+        margin-top: 2rem;
+    }
+
+    .card-text-side {
+        grid-column: span 5 !important;
+    }
+
+    .card-image-container {
+        grid-column: span 2 !important;
+    }
+
+    aside .card {
+        grid-template-columns: repeat(7, 1fr) !important;
+    }
+
+    aside .card-text-side {
+        grid-column: span 5 !important;
+    }
+
+    aside .card-image-container {
+        grid-column: span 2 !important;
+    }
+
+    aside .card-text {
+        font-size: 1rem !important;
+    }
+}
+
+@media (max-width: 850px) {
+    .card-text-side {
+        grid-column: span 4 !important;
+    }
+
+    .card-image-container {
+        grid-column: span 3 !important;
+    }
+
+    aside .card {
+        padding-bottom: 0 !important;
+    }
+}
+
+@media (max-width: 650px) {
+    .title {
+        text-align: center;
+    }
+
+    .main-container {
+        grid-gap: 0 !important;
+    }
+
+    .card {
+        grid-template-columns: 1fr !important;
+        padding-bottom: 10px !important;
+        grid-gap: 0;
+    }
+
+    aside .card {
+        grid-template-columns: 1fr !important;
+        padding-bottom: 10px !important;
+    }
+}
