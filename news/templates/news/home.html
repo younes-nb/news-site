@@ -90,8 +90,8 @@
         <div class="showcase-container">
             <div class="slideshow-container">
                 <div class="slideshow">
-                    {% if slider_post %}
-                        {% for post in slider_post %}
+                    {% if slider_posts %}
+                        {% for post in slider_posts %}
                             <div class="mySlides fade">
                                 <div class="numbertext">3 / {{ forloop.counter }}</div>
                                 <a href="#"><img src="{{ post.image.url }}" style="width:100%"></a>
@@ -110,8 +110,8 @@
             </div>
 
             <div class="cards-container">
-                {% if slider_post %}
-                    {% for post in slider_post %}
+                {% if slider_posts %}
+                    {% for post in slider_posts %}
                         <article class="card">
                             <div class="card-image-container">
                                 <a href="news-page.html"><img src="{{ post.image.url }}"
@@ -146,25 +146,47 @@
     <div class="container">
         <div class="main-container">
             <section class="cards-container">
-                {#                <article class="card">#}
-                {#                    <div class="card-image-container">#}
-                {#                        <a href="news-page.html"><img src="../images/political.jpg" alt="political"#}
-                {#                                                      title="لورم ایپسوم"/></a>#}
-                {#                    </div>#}
-                {#                    <div class="card-text-side">#}
-                {#                        <a href="news-page.html" class="card-title"><h2>لورم ایپسوم</h2></a>#}
-                {#                        <a href="news-page.html" class="card-text"><p>#}
-                {#                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با#}
-                {#                            استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و#}
-                {#                            مجله در ستون و سطرآنچنان که لازم است#}
-                {#                        </p></a>#}
-                {#                    </div>#}
-                {#                </article>#}
 
             </section>
             <aside>
-                {#                top 5 view#}
-                {#                5 last post#}
+                <div class="popular-posts">
+                    <h3 class="side-title">اخبار پربازدید</h3>
+                    {% if popular_posts %}
+                        {% for post in popular_posts %}
+                            <article class="card">
+                                <div class="card-image-container">
+                                    <a href="news-page.html"><img src="{{ post.image.url }}"
+                                                                  title="{{ post.title }}"/></a>
+                                </div>
+                                <div class="card-text-side">
+                                    <a href="news-page.html" class="card-title"><h4>{{ post.title }}</h4></a>
+                                    <a href="news-page.html" class="card-text"><p>
+                                        {{ post.text|truncatewords:10 | safe }}
+                                    </p></a>
+                                </div>
+                            </article>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="recent-posts">
+                    <h3 class="side-title">آخرین اخبار</h3>
+                    {% if recent_posts %}
+                        {% for post in recent_posts %}
+                            <article class="card">
+                                <div class="card-image-container">
+                                    <a href="news-page.html"><img src="{{ post.image.url }}"
+                                                                  title="{{ post.title }}"/></a>
+                                </div>
+                                <div class="card-text-side">
+                                    <a href="news-page.html" class="card-title"><h4>{{ post.title }}</h4></a>
+                                    <a href="news-page.html" class="card-text"><p>
+                                        {{ post.text|truncatewords:10 | safe }}
+                                    </p></a>
+                                </div>
+                            </article>
+                        {% endfor %}
+                    {% endif %}
+                </div>
             </aside>
         </div>
     </div>
