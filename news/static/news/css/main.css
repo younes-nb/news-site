@@ -263,6 +263,7 @@ a {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-gap: 2rem;
+    margin-top: 1rem;
 }
 
 .slideshow-container {
@@ -435,8 +436,8 @@ main {
 .main-container {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-gap: 1rem;
-    margin-bottom: 1rem;
+    grid-gap: 2rem;
+    margin: 1rem 0;
 }
 
 .main-container .cards-container {
@@ -463,6 +464,29 @@ main {
 
 .main-container .card-text-side {
     grid-column: span 5;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.pagination .active-pag span {
+    padding: 0.4rem 0.9rem;
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    border-radius: 5px;
+}
+
+.disabled span {
+    padding: 0.4rem 0.9rem;
+}
+
+.pagination a {
+    color: black;
+    padding: 0.4rem 0.9rem;
+    text-decoration: none;
 }
 
 aside {
