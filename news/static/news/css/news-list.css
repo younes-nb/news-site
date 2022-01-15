@@ -1,39 +1,15 @@
-html {
-    font-size: 15px;
-}
-
 .title {
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
     font-family: var(--font-yekan);
 }
 
+
 #main-nav {
     margin-bottom: 0.6rem;
 }
 
-.main-container {
-    grid-template-columns: repeat(5, 1fr) !important;
-    grid-gap: 2rem !important;
-}
-
-.cards-container {
-    grid-column: span 3 !important;
-}
-
-aside {
-    grid-column: span 2 !important;
-}
-
-.card-image-container {
-    grid-column: span 3 !important;
-}
-
-.card-text-side {
-    grid-column: span 4 !important;
-}
-
-#side-news .side-title {
+.side-news .side-title {
     font-size: 1.3rem;
     border-radius: 5px;
     margin-bottom: 2rem;

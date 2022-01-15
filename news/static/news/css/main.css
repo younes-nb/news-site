@@ -235,6 +235,7 @@ a {
     border-radius: 500px;
     font-family: "Vazir", Arial, Helvetica, sans-serif;
     transition: all 0.5s;
+    width: 25vw;
 }
 
 .search-box input[type="search"]:focus {
@@ -469,7 +470,7 @@ main {
 .pagination {
     display: flex;
     justify-content: center;
-    margin-top: 1rem;
+    margin: 1.5rem 0;
 }
 
 .pagination .active-pag span {
@@ -480,7 +481,7 @@ main {
 }
 
 .disabled span {
-    padding: 0.4rem 0.9rem;
+    display: none;
 }
 
 .pagination a {

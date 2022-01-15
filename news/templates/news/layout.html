@@ -1,0 +1,177 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8"/>
+    <meta
+            name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>VENUS</title>
+    <script
+            src="https://kit.fontawesome.com/2185f713f9.js"
+            crossorigin="anonymous"
+    ></script>
+    <link rel="icon" href="{% static 'news/Images/logo.png' %}">
+    <link rel="stylesheet" href="{% static 'news/css/main.css' %}"/>
+</head>
+
+<body>
+<a href="#top"><img class="to-top-arrow" src="{% static 'news/Images/carousel-arrow-dark.png' %}" alt="to top"
+                    title="برو به بالا"/></a>
+<nav class="fixed-nav">
+    <input type="checkbox" id="check-nav" hidden/>
+    <div class="hamburger-menu">
+        <label for="check-nav" class="menu-lines">
+            <div class="menu-line menu-line-1"></div>
+            <div class="menu-line menu-line-2"></div>
+            <div class="menu-line menu-line-3"></div>
+        </label>
+    </div>
+    <div class="menu">
+        <ul class="menu-items">
+            <li>
+                <a href="login.html"
+                ><i class="fas fa-user"></i> ورود به حساب کاربری</a
+                >
+            </li>
+            <li>
+                <a href="sign-in.html"><i class="fas fa-user-plus"></i> ایجاد حساب کاربری</a>
+            </li>
+            <li>
+                <hr/>
+            </li>
+            <li>
+                <a href="/"><i class="fas fa-home"></i> صفحه اصلی</a>
+            </li>
+            <li>
+                <a href="/news-list"
+                ><i class="fas fa-bullhorn"></i> لیست اخبار</a
+                >
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<nav id="main-nav">
+    <div class="container">
+        <div class="nav-title">
+            <a href="home.html"><img src="{% static 'news/Images/logo.png' %}" class="logo" id="top" alt="logo"/></a>
+            <a href="home.html"><p class="main-title">VENUS</p></a>
+        </div>
+        <ul>
+            <li>
+                <a href="/"
+                ><i class="fas fa-home"></i> صفحه اصلی</a
+                >
+            </li>
+            <li>
+                <a href="/news-list"><i class="fas fa-bullhorn"></i> لیست اخبار</a
+                >
+            </li>
+        </ul>
+        <div class="nav-left-side">
+            <div class="search-box">
+                <form>
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="search" placeholder="جستجو"/>
+                </form>
+            </div>
+            <a href="login.html" class="nav-left-icon" title="ورود به حساب کاربری"
+            ><i class="fas fa-user-circle"></i
+            ></a>
+        </div>
+    </div>
+</nav>
+
+{% block head %} {% endblock %}
+<div style="height: 100px; overflow: hidden">
+    <svg
+            viewBox="0 0 500 150"
+            preserveAspectRatio="none"
+            style="height: 100%; width: 100%"
+    >
+        <path
+                d="M0.00,49.98 C149.99,150.00 349.20,-49.98 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"
+                style="stroke: none; fill: #f0f0f0"
+        ></path>
+    </svg>
+</div>
+<main>
+    <div class="container">
+        <h1 class="title">{% block title %} {% endblock %}</h1>
+        <div class="main-container">
+            <section class="cards-container">
+                {% block main_posts %} {% endblock %}
+            </section>
+            <aside>
+                <div class="side-news">
+                    <h3 class="side-title">{% block side_title_1 %} {% endblock %}</h3>
+                    {% block side_posts_1 %} {% endblock %}
+                </div>
+                <div class="side-news">
+                    <h3 class="side-title">{% block side_title_2 %} {% endblock %}</h3>
+                    {% block side_posts_2 %} {% endblock %}
+                </div>
+            </aside>
+        </div>
+    </div>
+</main>
+
+<div style="height: 100px; overflow: hidden">
+    <svg
+            viewBox="0 0 500 150"
+            preserveAspectRatio="none"
+            style="height: 100%; width: 100%"
+    >
+        <path
+                d="M0.00,49.98 C149.99,150.00 271.49,-49.98 500.00,49.98 L500.00,0.00 L0.00,0.00 Z"
+                style="stroke: none; fill: #f0f0f0"
+        ></path>
+    </svg>
+</div>
+
+<div style="height: 150px; overflow: hidden">
+    <svg
+            viewBox="0 0 500 150"
+            preserveAspectRatio="none"
+            style="height: 100%; width: 100%"
+    >
+        <path
+                d="M0.00,49.98 C149.99,150.00 349.20,-49.98 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"
+                style="stroke: none; fill: #2d3032"
+        ></path>
+    </svg>
+</div>
+
+<footer>
+    <div class="container">
+        <div class="main-footer-container">
+            <div class="nav-title">
+                <a href="home.html"><img src="{% static 'news/Images/logo.png' %}" class="logo" alt="logo"/></a>
+                <a href="home.html"><p class="main-title">VENUS</p></a>
+            </div>
+            <div class="parts-menu">
+                <ul>
+                    <li><a href="/news-list">لیست اخبار</a></li>
+                    <li><a href="#">ثبت نام</a></li>
+                    <li><a href="#">ورود به حساب کاربری</a></li>
+                </ul>
+            </div>
+            <div class="icons">
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+        <div class="copyright">
+            © استفاده از مطالب سایت تنها با درج لینک مستقیم به آن مطلب مجاز است.
+        </div>
+    </div>
+</footer>
+</body>
+<script src="{% static "news/js/slide_show.js" %}"></script>
+</html>
