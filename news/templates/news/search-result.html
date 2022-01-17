@@ -1,0 +1,47 @@
+{% extends 'news/layout.html' %}
+
+{% block title %}
+    نتایج جستجو
+{% endblock %}
+{% block main_posts %}
+    {% if main_posts %}
+        {% for post in main_posts %}
+            <article class="card">
+                <div class="card-image-container">
+                    <a href="/news-details/{{ post.id }}/"><img src="{{ post.image.url }}"
+                                                                title="{{ post.title }}"/></a>
+                </div>
+                <div class="card-text-side">
+                    <a href="/news-details/{{ post.id }}/" class="card-title"><h3>{{ post.title }}</h3></a>
+                    <a href="/news-details/{{ post.id }}/" class="card-text"><p>
+                        {{ post.text|truncatewords:20 | safe }}
+                    </p></a>
+                </div>
+            </article>
+        {% endfor %}
+    {% endif %}
+    <div>
+        {% if main_posts.has_other_pages %}
+            <ul class="pagination">
+                {% if main_posts.has_previous %}
+                    <li><a href="?search={{ search }}&main_page_num={{ main_posts.previous_page_number }}">&laquo;</a>
+                    </li>
+                {% else %}
+                    <li class="disabled"><span>&laquo;</span></li>
+                {% endif %}
+                {% for i in main_posts.paginator.page_range %}
+                    {% if main_posts.number == i %}
+                        <li class="active-pag"><span>{{ i }}</span></li>
+                    {% else %}
+                        <li><a href="?search={{ search }}&main_page_num={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if main_posts.has_next %}
+                    <li><a href="?search={{ search }}&main_page_num={{ main_posts.next_page_number }}">&raquo;</a></li>
+                {% else %}
+                    <li class="disabled"><span>&raquo;</span></li>
+                {% endif %}
+            </ul>
+        {% endif %}
+    </div>
+{% endblock %}

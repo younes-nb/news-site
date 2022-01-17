@@ -6,12 +6,12 @@
         {% for post in main_posts %}
             <article class="card">
                 <div class="card-image-container">
-                    <a href="news-page.html"><img src="{{ post.image.url }}"
-                                                  title="{{ post.title }}"/></a>
+                    <a href="/news-details/{{ post.id }}/"><img src="{{ post.image.url }}"
+                                                                title="{{ post.title }}"/></a>
                 </div>
                 <div class="card-text-side">
-                    <a href="news-page.html" class="card-title"><h3>{{ post.title }}</h3></a>
-                    <a href="news-page.html" class="card-text"><p>
+                    <a href="/news-details/{{ post.id }}/" class="card-title"><h3>{{ post.title }}</h3></a>
+                    <a href="/news-details/{{ post.id }}/" class="card-text"><p>
                         {{ post.text|truncatewords:20 | safe }}
                     </p></a>
                 </div>
@@ -43,6 +43,16 @@
     </div>
 {% endblock %}
 
+{% block filter_title %}
+    فیلتر اخبار
+{% endblock %}
+{% block filter %}
+    <form class="filter-form" action="{% url 'news-list' %}" method="GET">
+        {{ filter_form }}
+        <input type="submit" id="filter-submit" value="مرتب سازی">
+    </form>
+{% endblock %}
+
 {% block side_title_1 %}
     پربازدید ترین ها
 {% endblock %}
@@ -51,12 +61,12 @@
         {% for post in popular_posts_view %}
             <article class="card">
                 <div class="card-image-container">
-                    <a href="news-page.html"><img src="{{ post.image.url }}"
-                                                  title="{{ post.title }}"/></a>
+                    <a href="/news-details/{{ post.id }}/"><img src="{{ post.image.url }}"
+                                                                title="{{ post.title }}"/></a>
                 </div>
                 <div class="card-text-side">
-                    <a href="news-page.html" class="card-title"><h3>{{ post.title }}</h3></a>
-                    <a href="news-page.html" class="card-text"><p>
+                    <a href="/news-details/{{ post.id }}/" class="card-title"><h3>{{ post.title }}</h3></a>
+                    <a href="/news-details/{{ post.id }}/" class="card-text"><p>
                         {{ post.text|truncatewords:10 | safe }}
                     </p></a>
                 </div>
@@ -99,12 +109,12 @@
         {% for post in popular_posts_comments %}
             <article class="card">
                 <div class="card-image-container">
-                    <a href="news-page.html"><img src="{{ post.image.url }}"
-                                                  title="{{ post.title }}"/></a>
+                    <a href="/news-details/{{ post.id }}/"><img src="{{ post.image.url }}"
+                                                                title="{{ post.title }}"/></a>
                 </div>
                 <div class="card-text-side">
-                    <a href="news-page.html" class="card-title"><h3>{{ post.title }}</h3></a>
-                    <a href="news-page.html" class="card-text"><p>
+                    <a href="/news-details/{{ post.id }}/" class="card-title"><h3>{{ post.title }}</h3></a>
+                    <a href="/news-details/{{ post.id }}/" class="card-text"><p>
                         {{ post.text|truncatewords:10 | safe }}
                     </p></a>
                 </div>

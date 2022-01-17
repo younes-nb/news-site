@@ -1,0 +1,59 @@
+{% extends 'news/layout.html' %}
+{% load static %}
+
+{% block title %}
+    {{ post.title }}
+{% endblock %}
+
+{% block main_posts %}
+    <div class="news-image">
+        <img src="{{ post.image.url }}"/>
+    </div>
+    <p class="news-text">
+        {{ post.text | safe }}
+    </p>
+{% endblock %}
+
+{% block side_title_1 %}
+    اخبار پربازدید
+{% endblock %}
+{% block side_posts_1 %}
+    {% if popular_posts %}
+        {% for post in popular_posts %}
+            <article class="card">
+                <div class="card-image-container">
+                    <a href="/news-details/{{ post.id }}/"><img src="{{ post.image.url }}"
+                                                                title="{{ post.title }}"/></a>
+                </div>
+                <div class="card-text-side">
+                    <a href="/news-details/{{ post.id }}/" class="card-title"><h4>{{ post.title }}</h4></a>
+                    <a href="/news-details/{{ post.id }}/" class="card-text"><p>
+                        {{ post.text|truncatewords:10 | safe }}
+                    </p></a>
+                </div>
+            </article>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+
+{% block  side_title_2 %}
+    آخرین اخبار
+{% endblock %}
+{% block side_posts_2 %}
+    {% if recent_posts %}
+        {% for post in recent_posts %}
+            <article class="card">
+                <div class="card-image-container">
+                    <a href="/news-details/{{ post.id }}/"><img src="{{ post.image.url }}"
+                                                                title="{{ post.title }}"/></a>
+                </div>
+                <div class="card-text-side">
+                    <a href="/news-details/{{ post.id }}/" class="card-title"><h4>{{ post.title }}</h4></a>
+                    <a href="/news-details/{{ post.id }}/" class="card-text"><p>
+                        {{ post.text|truncatewords:10 | safe }}
+                    </p></a>
+                </div>
+            </article>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

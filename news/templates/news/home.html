@@ -10,8 +10,9 @@
                             {% for post in slider_posts %}
                                 <div class="mySlides fade">
                                     <div class="numbertext">3 / {{ forloop.counter }}</div>
-                                    <a href="#"><img src="{{ post.image.url }}" style="width:100%"></a>
-                                    <a href="#" class="text">{{ post.title }}</a>
+                                    <a href="/news-details/{{ post.id }}/"><img src="{{ post.image.url }}"
+                                                                                style="width:100%"></a>
+                                    <a href="/news-details/{{ post.id }}/" class="text">{{ post.title }}</a>
                                 </div>
                             {% endfor %}
                         {% endif %}
@@ -30,12 +31,13 @@
                         {% for post in slider_posts %}
                             <article class="card">
                                 <div class="card-image-container">
-                                    <a href="news-page.html"><img src="{{ post.image.url }}"
-                                                                  title="{{ post.title }}"/></a>
+                                    <a href="/news-details/{{ post.id }}/"><img src="{{ post.image.url }}"
+                                                                                title="{{ post.title }}"/></a>
                                 </div>
                                 <div class="card-text-side">
-                                    <a href="news-page.html" class="card-title"><h3>{{ post.title }}</h3></a>
-                                    <a href="news-page.html" class="card-text"><p>
+                                    <a href="/news-details/{{ post.id }}/" class="card-title"><h3>{{ post.title }}</h3>
+                                    </a>
+                                    <a href="/news-details/{{ post.id }}/" class="card-text"><p>
                                         {{ post.text|truncatewords:20 | safe }}
                                     </p></a>
                                 </div>
@@ -53,12 +55,12 @@
         {% for post in main_posts %}
             <article class="card">
                 <div class="card-image-container">
-                    <a href="news-page.html"><img src="{{ post.image.url }}"
-                                                  title="{{ post.title }}"/></a>
+                    <a href="/news-details/{{ post.id }}/"><img src="{{ post.image.url }}"
+                                                                title="{{ post.title }}"/></a>
                 </div>
                 <div class="card-text-side">
-                    <a href="news-page.html" class="card-title"><h3>{{ post.title }}</h3></a>
-                    <a href="news-page.html" class="card-text"><p>
+                    <a href="/news-details/{{ post.id }}/" class="card-title"><h3>{{ post.title }}</h3></a>
+                    <a href="/news-details/{{ post.id }}/" class="card-text"><p>
                         {{ post.text|truncatewords:20 | safe }}
                     </p></a>
                 </div>
@@ -98,12 +100,12 @@
         {% for post in popular_posts %}
             <article class="card">
                 <div class="card-image-container">
-                    <a href="news-page.html"><img src="{{ post.image.url }}"
-                                                  title="{{ post.title }}"/></a>
+                    <a href="/news-details/{{ post.id }}/"><img src="{{ post.image.url }}"
+                                                                title="{{ post.title }}"/></a>
                 </div>
                 <div class="card-text-side">
-                    <a href="news-page.html" class="card-title"><h4>{{ post.title }}</h4></a>
-                    <a href="news-page.html" class="card-text"><p>
+                    <a href="/news-details/{{ post.id }}/" class="card-title"><h4>{{ post.title }}</h4></a>
+                    <a href="/news-details/{{ post.id }}/" class="card-text"><p>
                         {{ post.text|truncatewords:10 | safe }}
                     </p></a>
                 </div>
@@ -120,12 +122,12 @@
         {% for post in recent_posts %}
             <article class="card">
                 <div class="card-image-container">
-                    <a href="news-page.html"><img src="{{ post.image.url }}"
-                                                  title="{{ post.title }}"/></a>
+                    <a href="/news-details/{{ post.id }}/"><img src="{{ post.image.url }}"
+                                                                title="{{ post.title }}"/></a>
                 </div>
                 <div class="card-text-side">
-                    <a href="news-page.html" class="card-title"><h4>{{ post.title }}</h4></a>
-                    <a href="news-page.html" class="card-text"><p>
+                    <a href="/news-details/{{ post.id }}/" class="card-title"><h4>{{ post.title }}</h4></a>
+                    <a href="/news-details/{{ post.id }}/" class="card-text"><p>
                         {{ post.text|truncatewords:10 | safe }}
                     </p></a>
                 </div>

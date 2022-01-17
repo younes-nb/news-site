@@ -20,39 +20,6 @@
 <body>
 <a href="#top"><img class="to-top-arrow" src="{% static 'news/Images/carousel-arrow-dark.png' %}" alt="to top"
                     title="برو به بالا"/></a>
-<nav class="fixed-nav">
-    <input type="checkbox" id="check-nav" hidden/>
-    <div class="hamburger-menu">
-        <label for="check-nav" class="menu-lines">
-            <div class="menu-line menu-line-1"></div>
-            <div class="menu-line menu-line-2"></div>
-            <div class="menu-line menu-line-3"></div>
-        </label>
-    </div>
-    <div class="menu">
-        <ul class="menu-items">
-            <li>
-                <a href="login.html"
-                ><i class="fas fa-user"></i> ورود به حساب کاربری</a
-                >
-            </li>
-            <li>
-                <a href="sign-in.html"><i class="fas fa-user-plus"></i> ایجاد حساب کاربری</a>
-            </li>
-            <li>
-                <hr/>
-            </li>
-            <li>
-                <a href="/"><i class="fas fa-home"></i> صفحه اصلی</a>
-            </li>
-            <li>
-                <a href="/news-list"
-                ><i class="fas fa-bullhorn"></i> لیست اخبار</a
-                >
-            </li>
-        </ul>
-    </div>
-</nav>
 
 <nav id="main-nav">
     <div class="container">
@@ -73,9 +40,9 @@
         </ul>
         <div class="nav-left-side">
             <div class="search-box">
-                <form>
+                <form action='{% url 'search' %}' method="GET">
                     <i class="fas fa-search search-icon"></i>
-                    <input type="search" placeholder="جستجو"/>
+                    <input type="search" name="search" placeholder="جستجو"/>
                 </form>
             </div>
             <a href="login.html" class="nav-left-icon" title="ورود به حساب کاربری"
@@ -113,6 +80,10 @@
                 <div class="side-news">
                     <h3 class="side-title">{% block side_title_2 %} {% endblock %}</h3>
                     {% block side_posts_2 %} {% endblock %}
+                </div>
+                <div class="filter-news">
+                    <h3 class="side-title">{% block filter_title %} {% endblock %}</h3>
+                    {% block filter %} {% endblock %}
                 </div>
             </aside>
         </div>
