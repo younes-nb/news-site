@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8"/>
+    <meta
+            name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>{% block page_title %} {% endblock %}</title>
+    <link rel="icon" href="{% static 'news/Images/logo.png' %}">
+    <link rel="stylesheet" href="{% static 'news/css/main.css' %}"/>
+    <link rel="stylesheet" href="{% static 'accounts/css/login.css' %}"/>
+</head>
+<body>
+<section>
+    {% block form %} {% endblock %}
+</section>
+</body>
+</html>

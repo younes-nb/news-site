@@ -37,6 +37,10 @@
                 <a href="/news-list"><i class="fas fa-bullhorn"></i> لیست اخبار</a
                 >
             </li>
+            <li>
+                <a href="/add-news"><i class="fas fa-plus"></i> افزودن خبر</a
+                >
+            </li>
         </ul>
         <div class="nav-left-side">
             <div class="search-box">
@@ -45,9 +49,16 @@
                     <input type="search" name="search" placeholder="جستجو"/>
                 </form>
             </div>
-            <a href="login.html" class="nav-left-icon" title="ورود به حساب کاربری"
-            ><i class="fas fa-user-circle"></i
-            ></a>
+            {% if user.is_authenticated %}
+                <a href="/logout" class="nav-left-icon" title="خروج از حساب کاربری"
+                ><i class="fas fa-sign-out-alt"></i></a>
+                <p class="user">{{ user.username }}</p>
+            {% else %}
+                <a href="/login" class="nav-left-icon" title="ورود به حساب کاربری"
+                ><i class="fas fa-user-circle"></i
+                ></a>
+                <a class="user" href="/login">ورود</a>
+            {% endif %}
         </div>
     </div>
 </nav>

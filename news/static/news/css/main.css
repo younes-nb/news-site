@@ -625,3 +625,13 @@ footer {
     text-align: center;
     background-color: var(--secondary-color);
 }
+
+.user {
+    display: inline-block;
+    color: var(--secondary-color);
+    transition: color 1s;
+}
+
+.user:hover{
+    color: var(--primary-color);
+}

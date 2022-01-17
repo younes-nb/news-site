@@ -1,0 +1,147 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    background-image: url("../images/leaves.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.login-title {
+    margin-bottom: 4rem;
+    width: 120px;
+    height: 120px;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    justify-content: center;
+}
+
+form {
+    width: 25vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 2rem 2rem 2rem;
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5);
+    transition: all 1s;
+}
+
+form:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.login-input {
+    width: 80%;
+    font-size: 1.07rem;
+    margin-bottom: 2.5rem;
+    padding: 0.4rem;
+    font-family: var(--font-vazir);
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    background-color: transparent;
+    color: var(--light-color);
+    border-bottom: 1px solid var(--primary-color);
+}
+
+.login-input:focus {
+    border-bottom: 2px solid var(--primary-color);
+    font-size: 1.1rem;
+}
+
+.login-input::placeholder {
+    color: var(--secondary-color);
+}
+
+input[type="submit"] {
+    width: 80%;
+    padding: 0.4rem;
+    margin-bottom: 3rem;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    border: none;
+    font-size: 1.1rem;
+    font-family: "Vazir", Arial, Helvetica, sans-serif;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    opacity: 0.9;
+}
+
+.login-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+p {
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+    margin-left: 8px;
+}
+
+.sign-in {
+    display: inline-block;
+    color: var(--primary-color);
+    font-size: 0.9rem;
+}
+
+.error{
+    color: red;
+    margin-top: 0.5rem;
+}
+@media (max-width: 1200px) {
+    .form {
+        width: 30vw;
+    }
+}
+
+@media (max-width: 1100px) {
+    .form {
+        width: 35vw;
+    }
+}
+
+@media (max-width: 800px) {
+    .form {
+        width: 40vw;
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 700px) {
+    .form {
+        width: 55vw;
+    }
+}
+
+@media (max-width: 550px) {
+    .form {
+        width: 65vw;
+    }
+}
+
+@media (max-width: 450px) {
+    .form {
+        width: 80vw;
+    }
+}
+
+@media (max-width: 350px) {
+    .form {
+        width: 90vw;
+        padding: 0.5rem;
+    }
+}

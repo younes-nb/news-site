@@ -1,0 +1,23 @@
+{% extends 'accounts/layout.html' %}
+{% load static %}
+
+{% block page_title %}
+    ورورد به حساب کاربری
+{% endblock %}
+
+{% block form %}
+    <form action="" method="POST" class="form">
+        {% csrf_token %}
+        <a href="/"><img src="{% static 'news/Images/logo.png' %}" alt="logo" class="login-title"></a>
+        <input type="text" name="username" class="login-input" placeholder="نام کاربری"/>
+        <input type="password" name="password" class="login-input" placeholder="رمز عبور"/>
+        <input type="submit" value="ورود"/>
+        <div class="login-text">
+            <p>
+                هنوز ثبت نام نکرده‌‌اید؟
+            </p>
+            <a href="/sign-in" class="sign-in">ثبت نام کنید</a>
+            <p class="error">{{ error_massage }}</p>
+        </div>
+    </form>
+{% endblock %}

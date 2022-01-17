@@ -1,12 +1,16 @@
+from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Q
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse
 
-from news.models import *
-from news.utils import *
-from news.forms import *
+from accounts import views
+from news.forms import FilterForm
+from news.models import Post
+from news.utils import pagination
 
 
-def home(request):
+def home_view(request):
     posts = Post.objects.all()
     main_page_num = request.GET.get('main_page_num', 1)
     context = {
@@ -18,7 +22,7 @@ def home(request):
     return render(request, "news/home.html", context)
 
 
-def news_list(request):
+def news_list_view(request):
     posts = Post.objects.all()
     main_page_num = request.GET.get('main_page_num', 1)
     popular_comments_page_num = request.GET.get('popular_comments_page_num', 1)
@@ -49,7 +53,7 @@ def news_list(request):
     return render(request, "news/news-list.html", context)
 
 
-def search_result(request):
+def search_result_view(request):
     main_page_num = request.GET.get('main_page_num')
 
     search = request.GET.get("search")
@@ -62,7 +66,7 @@ def search_result(request):
     return render(request, "news/search-result.html", context)
 
 
-def news_details(request, post_id):
+def news_details_view(request, post_id):
     post = Post.objects.get(pk=post_id)
     context = {
         "post": post,
@@ -70,3 +74,8 @@ def news_details(request, post_id):
         "recent_posts": Post.objects.all().order_by('-date')[:5],
     }
     return render(request, "news/news-details.html", context)
+
+
+@login_required
+def add_news_view(request):
+    return render(request, "news/add-news.html", {})
