@@ -40,7 +40,7 @@ form:hover {
 }
 
 .login-input {
-    width: 80%;
+    width: 100%;
     font-size: 1.07rem;
     margin-bottom: 2.5rem;
     padding: 0.4rem;
@@ -61,6 +61,7 @@ form:hover {
 .login-input::placeholder {
     color: var(--secondary-color);
 }
+
 
 input[type="submit"] {
     width: 80%;
@@ -98,10 +99,11 @@ p {
     font-size: 0.9rem;
 }
 
-.error{
+.error {
     color: red;
     margin-top: 0.5rem;
 }
+
 @media (max-width: 1200px) {
     .form {
         width: 30vw;
