@@ -573,7 +573,7 @@ footer {
 .news-info-container {
     display: flex;
     justify-content: space-between;
-    margin-top: 3rem;
+    margin: 3rem 0;
 }
 
 .author, .views {
@@ -653,11 +653,31 @@ footer {
 }
 
 .news-form input[type="checkbox"] {
-    /*margin: 2rem 0;*/
     width: 1rem;
     height: 1rem;
 }
 
 .news-form p {
     margin-bottom: 1.5rem;
+}
+
+.add-comment{
+    margin: 2rem 0;
+}
+
+.add-comment h2{
+    margin-bottom: 1rem;
+}
+
+.add-comment-form textarea{
+    border-radius: 10px;
+    border: 1px solid var(--secondary-color);
+    font-size: 1rem;
+    font-family: var(--font-vazir);
+    padding: 0.5rem;
+    outline: none;
+}
+
+.add-comment-form textarea:focus{
+    box-shadow: 0 0 2px 1px var(--primary-color);
 }

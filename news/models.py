@@ -25,6 +25,7 @@ class Comment(models.Model):
     class Meta:
         verbose_name = "نظر"
         verbose_name_plural = "نظرات"
+        ordering = ("-date",)
 
     post = models.ForeignKey("Post", on_delete=models.CASCADE, related_name="comments", verbose_name="پست", null=True)
     parent = models.ForeignKey("Comment", null=True, blank=True, related_name="replies", on_delete=models.CASCADE,

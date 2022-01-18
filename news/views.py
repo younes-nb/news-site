@@ -1,11 +1,11 @@
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Q
 from django.http import HttpResponseRedirect, HttpResponseForbidden
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 
 from News_Site import settings
-from news.forms import FilterForm, NewsForm
-from news.models import Post
+from news.forms import FilterForm, NewsForm, CommentForm, CommentValidationForm
+from news.models import Post, Comment
 from news.utils import pagination
 
 
@@ -69,12 +69,43 @@ def news_details_view(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     post.views += 1
     post.save()
+
+    comments = post.comments.filter(is_valid=True, parent__isnull=True)
+    if request.method == "POST":
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            parent = None
+            try:
+                parent_id = int(request.POST.get("parent_id"))
+            except:
+                parent_id = None
+            if parent_id:
+                parent = Comment.objects.get(id=parent_id)
+                if parent:
+                    reply_comment = comment_form.save(commit=False)
+                    reply_comment.parent = parent
+            comment = comment_form.save(commit=False)
+            comment.post = post
+            comment.save()
+            return redirect("/news-details/{}/".format(post.id))
+    else:
+        comment_form = CommentForm()
     context = {
         "post": post,
+        "comments": comments,
+        "comment_form": comment_form,
         "popular_posts": Post.objects.all().order_by('views')[:5],
         "recent_posts": Post.objects.all().order_by('-date')[:5],
     }
     return render(request, "news/news-details.html", context)
+
+
+# @login_required
+# def comment_validation_view(request, post_id):
+#     post = get_object_or_404(Post, pk=post_id)
+#     if request.user == post.author:
+#         if request.method == "POST":
+#             comment_form = CommentValidationForm(request.POST)
 
 
 @login_required
@@ -86,7 +117,7 @@ def add_news_view(request):
                         image=news_form.cleaned_data["image"],
                         promote=news_form.cleaned_data["promote"])
             post.save()
-            return HttpResponseRedirect(settings.LOGIN_REDIRECT_URL)
+            return redirect("/news-details/{}/".format(post.id))
     else:
         news_form = NewsForm()
     context = {
@@ -103,7 +134,7 @@ def edit_news(request, post_id):
             news_form = NewsForm(request.POST, request.FILES, instance=post)
             if news_form.is_valid():
                 news_form.save()
-                return HttpResponseRedirect(settings.LOGIN_REDIRECT_URL)
+                return redirect("/news-details/{}/".format(post.id))
         else:
             news_form = NewsForm(instance=post)
         context = {

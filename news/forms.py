@@ -1,5 +1,5 @@
 from django import forms
-from news.models import Post
+from news.models import Post, Comment
 
 filter_choices = (
     ("بازدید - (زیاد به کم)", "بازدید - (زیاد به کم)"),
@@ -22,3 +22,15 @@ class NewsForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ["title", "promote", "text", "image"]
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ["text"]
+
+
+class CommentValidationForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ["is_valid"]

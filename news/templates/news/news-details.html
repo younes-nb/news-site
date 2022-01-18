@@ -1,7 +1,7 @@
 {% extends 'news/layout.html' %}
 {% load static %}
 
-{% block page_title %}VENUS | {{ post.title  }}{% endblock %}
+{% block page_title %}VENUS | {{ post.title }}{% endblock %}
 
 {% block title %}
     {{ post.title }}
@@ -16,13 +16,53 @@
     </p>
     <div class="news-info-container">
         <div class="news-info">
-            <p class="author"><i class="fas fa-pen-alt"></i> نویسنده :  {{ post.author.username }}</p>
+            <p class="author"><i class="fas fa-pen-alt"></i> نویسنده : {{ post.author.username }}</p>
             <p class="views"><i class="far fa-eye"></i> بازدید : {{ post.views }}</p>
         </div>
         <div class="options">
             <a href="/edit-news/{{ post.id }}/" class="btn edit-btn"><i class="fas fa-edit"></i> ویرایش</a>
             <a href="/delete-news/{{ post.id }}/" class="btn delete-btn"><i class="fas fa-trash-alt"></i> حذف</a>
         </div>
+    </div>
+    <hr>
+    {% if user.is_authenticated %}
+        <div class="add-comment">
+            <h2>افزودن دیدگاه</h2>
+            <form action="" method="POST" class="add-comment-form">
+                {% csrf_token %}
+                <div>{{ comment_form.text }}</div>
+                <input type="submit" value="ارسال" class="btn primary-btn">
+            </form>
+        </div>
+    {% endif %}
+    <div class="comments-container">
+        {% for comment in comments %}
+            <div class="comment">
+                <p class="comment-info">
+                    {{ comment.author.username }} در تاریخ {{ comment.date }}
+                </p>
+                <p class="comment-body">
+                    {{ comment.text }}
+                </p>
+                {% for reply in comment.replies.all %}
+                    <p class="comment-info">
+                        {{ reply.author.username }} در تاریخ {{ reply.date }}
+                    </p>
+                    <p class="comment-bodu">
+                        {{ reply.text }}
+                    </p>
+                {% endfor %}
+                <h5>پاسخ</h5>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {{ comment_form.as_p }}
+                    <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                    <input type="submit" value="ارسال" class="btn primary-btn">
+                </form>
+            </div>
+        {% empty %}
+            <h2>هنوز دیدگاهی وجود ندارد</h2>
+        {% endfor %}
     </div>
 {% endblock %}
 
