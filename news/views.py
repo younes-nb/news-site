@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Q
 from django.http import HttpResponseRedirect, HttpResponseForbidden
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from News_Site import settings
 from news.forms import FilterForm, NewsForm
@@ -66,7 +66,7 @@ def search_result_view(request):
 
 
 def news_details_view(request, post_id):
-    post = Post.objects.get(pk=post_id)
+    post = get_object_or_404(Post, pk=post_id)
     post.views += 1
     post.save()
     context = {
@@ -97,7 +97,7 @@ def add_news_view(request):
 
 @login_required
 def edit_news(request, post_id):
-    post = Post.objects.get(pk=post_id)
+    post = get_object_or_404(Post, pk=post_id)
     if request.user == post.author:
         if request.method == "POST":
             news_form = NewsForm(request.POST, request.FILES, instance=post)
@@ -110,4 +110,13 @@ def edit_news(request, post_id):
             "form": news_form,
         }
         return render(request, "news/edit-news.html", context)
+    return HttpResponseForbidden(request)
+
+
+@login_required
+def delete_news(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+    if request.user == post.author:
+        post.delete()
+        return HttpResponseRedirect(settings.LOGIN_REDIRECT_URL)
     return HttpResponseForbidden(request)

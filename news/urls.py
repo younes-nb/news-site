@@ -7,5 +7,6 @@ urlpatterns = [
     path('search_result/', views.search_result_view, name="search"),
     path('news-details/<int:post_id>/', views.news_details_view),
     path('add-news/', views.add_news_view, name="add-news"),
-    path('edit-news/<int:post_id>/', views.edit_news)
+    path('edit-news/<int:post_id>/', views.edit_news),
+    path('delete-news/<int:post_id>/', views.delete_news)
 ]
