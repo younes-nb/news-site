@@ -1,11 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Q
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.shortcuts import render
-from django.urls import reverse
 
-from accounts import views
-from news.forms import FilterForm
+from News_Site import settings
+from news.forms import FilterForm, NewsForm
 from news.models import Post
 from news.utils import pagination
 
@@ -68,6 +67,8 @@ def search_result_view(request):
 
 def news_details_view(request, post_id):
     post = Post.objects.get(pk=post_id)
+    post.views += 1
+    post.save()
     context = {
         "post": post,
         "popular_posts": Post.objects.all().order_by('views')[:5],
@@ -78,4 +79,35 @@ def news_details_view(request, post_id):
 
 @login_required
 def add_news_view(request):
-    return render(request, "news/add-news.html", {})
+    if request.method == "POST":
+        news_form = NewsForm(request.POST, request.FILES)
+        if news_form.is_valid():
+            post = Post(author=request.user, title=news_form.cleaned_data["title"], text=news_form.cleaned_data["text"],
+                        image=news_form.cleaned_data["image"],
+                        promote=news_form.cleaned_data["promote"])
+            post.save()
+            return HttpResponseRedirect(settings.LOGIN_REDIRECT_URL)
+    else:
+        news_form = NewsForm()
+    context = {
+        "form": news_form,
+    }
+    return render(request, "news/add-news.html", context)
+
+
+@login_required
+def edit_news(request, post_id):
+    post = Post.objects.get(pk=post_id)
+    if request.user == post.author:
+        if request.method == "POST":
+            news_form = NewsForm(request.POST, request.FILES, instance=post)
+            if news_form.is_valid():
+                news_form.save()
+                return HttpResponseRedirect(settings.LOGIN_REDIRECT_URL)
+        else:
+            news_form = NewsForm(instance=post)
+        context = {
+            "form": news_form,
+        }
+        return render(request, "news/edit-news.html", context)
+    return HttpResponseForbidden(request)

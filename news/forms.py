@@ -1,4 +1,5 @@
 from django import forms
+from news.models import Post
 
 filter_choices = (
     ("بازدید - (زیاد به کم)", "بازدید - (زیاد به کم)"),
@@ -15,3 +16,9 @@ class FilterForm(forms.Form):
                                  widget=forms.DateInput(attrs={"class": "filter-input"}))
     end_date = forms.DateField(required=False, label="تاریخ پایان",
                                widget=forms.DateInput(attrs={"class": "filter-input"}))
+
+
+class NewsForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ["title", "promote", "text", "image"]

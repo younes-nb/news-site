@@ -1,6 +1,8 @@
 {% extends 'news/layout.html' %}
 {% load static %}
 
+{% block page_title %}VENUS | {{ post.title  }}{% endblock %}
+
 {% block title %}
     {{ post.title }}
 {% endblock %}
@@ -12,6 +14,16 @@
     <p class="news-text">
         {{ post.text | safe }}
     </p>
+    <div class="news-info-container">
+        <div class="news-info">
+            <p class="author"><i class="fas fa-pen-alt"></i> نویسنده :  {{ post.author.username }}</p>
+            <p class="views"><i class="far fa-eye"></i> بازدید : {{ post.views }}</p>
+        </div>
+        <div class="options">
+            <a href="/edit-news/{{ post.id }}/" class="btn edit-btn"><i class="fas fa-edit"></i> ویرایش</a>
+            <a href="" class="btn delete-btn"><i class="fas fa-trash-alt"></i> حذف</a>
+        </div>
+    </div>
 {% endblock %}
 
 {% block side_title_1 %}

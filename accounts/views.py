@@ -44,7 +44,7 @@ def user_register(request):
             return HttpResponseRedirect(settings.LOGIN_REDIRECT_URL)
     else:
         form = UserRegisterForm()
-    return render(request=request, template_name='accounts/sign-in.html', context={'form': form})
+    return render(request=request, template_name='accounts/register.html', context={'form': form})
 
 
 @login_required

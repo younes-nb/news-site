@@ -29,16 +29,16 @@
         </div>
         <ul>
             <li>
-                <a href="{% url 'home' %}"
+                <a href="/"
                 ><i class="fas fa-home"></i> صفحه اصلی</a
                 >
             </li>
             <li>
-                <a href="{% url 'news-list' %}"><i class="fas fa-bullhorn"></i> لیست اخبار</a
+                <a href="/news-list"><i class="fas fa-bullhorn"></i> لیست اخبار</a
                 >
             </li>
             <li>
-                <a href="{% url 'add-news' %}"><i class="fas fa-plus"></i> افزودن خبر</a
+                <a href="/add-news"><i class="fas fa-plus"></i> افزودن خبر</a
                 >
             </li>
         </ul>
@@ -78,29 +78,12 @@
 </div>
 <main>
     <div class="container">
-        <h1 class="title">{% block title %} {% endblock %}</h1>
-        <div class="main-container">
-            <section class="cards-container">
-                {% block main_posts %} {% endblock %}
-            </section>
-            <aside>
-                <div class="side-news">
-                    <h3 class="side-title">{% block side_title_1 %} {% endblock %}</h3>
-                    {% block side_posts_1 %} {% endblock %}
-                </div>
-                <div class="side-news">
-                    <h3 class="side-title">{% block side_title_2 %} {% endblock %}</h3>
-                    {% block side_posts_2 %} {% endblock %}
-                </div>
-                <div class="filter-news">
-                    <h3 class="side-title">{% block filter_title %} {% endblock %}</h3>
-                    {% block filter %} {% endblock %}
-                </div>
-            </aside>
-        </div>
+        <section class="news-form-container">
+            {% block title %} {% endblock %}
+            {% block form %} {% endblock %}
+        </section>
     </div>
 </main>
-
 <div style="height: 100px; overflow: hidden">
     <svg
             viewBox="0 0 500 150"
@@ -155,5 +138,6 @@
     </div>
 </footer>
 </body>
-<script src="{% static "news/js/slide_show.js" %}"></script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
 </html>
