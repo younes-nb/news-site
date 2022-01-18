@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.shortcuts import render, get_object_or_404, redirect
 
 from News_Site import settings
-from news.forms import FilterForm, NewsForm, CommentForm, CommentValidationForm
+from news.forms import FilterForm, NewsForm, CommentForm
 from news.models import Post, Comment
 from news.utils import pagination
 
@@ -43,10 +43,10 @@ def news_list_view(request):
         main_posts = main_posts.order_by("date")
 
     context = {
-        "popular_posts_view": pagination(posts.order_by('views'), 3, popular_view_page_num),
-        "popular_posts_comments": pagination(posts.annotate(num=Count("comments")).order_by("-num"), 3,
+        "popular_posts_view": pagination(posts.order_by('views'), 5, popular_view_page_num),
+        "popular_posts_comments": pagination(posts.annotate(num=Count("comments")).order_by("-num"), 5,
                                              popular_comments_page_num),
-        "main_posts": pagination(main_posts, 3, main_page_num),
+        "main_posts": pagination(main_posts, 10, main_page_num),
         "filter_form": filter_form
     }
     return render(request, "news/news-list.html", context)
@@ -59,7 +59,7 @@ def search_result_view(request):
     print(main_page_num)
     main_posts = Post.objects.all().filter(Q(title__icontains=search) | Q(text__icontains=search))
     context = {
-        "main_posts": pagination(main_posts, 1, main_page_num),
+        "main_posts": pagination(main_posts, 10, main_page_num),
         "search": search,
     }
     return render(request, "news/search-result.html", context)
@@ -69,10 +69,10 @@ def news_details_view(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     post.views += 1
     post.save()
-    # if request.user = a
-    #     comments = post.comments.filter(parent__isnull=True)
-    # else:
-    #     comments = post.comments.filter(is_valid=True, parent__isnull=True)
+    comments = post.comments.filter(is_valid=True, parent__isnull=True)
+    if request.user == post.author:
+        comments = post.comments.filter(parent__isnull=True)
+
     if request.method == "POST":
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
@@ -86,8 +86,10 @@ def news_details_view(request, post_id):
                 if parent:
                     reply_comment = comment_form.save(commit=False)
                     reply_comment.parent = parent
+                    reply_comment.author = request.user
             comment = comment_form.save(commit=False)
             comment.post = post
+            comment.author = request.user
             comment.save()
             return redirect("/news-details/{}/".format(post.id))
     else:

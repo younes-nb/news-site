@@ -24,55 +24,69 @@
             <a href="/delete-news/{{ post.id }}/" class="btn delete-btn"><i class="fas fa-trash-alt"></i> حذف</a>
         </div>
     </div>
-    <hr>
     {% if user.is_authenticated %}
+        <hr>
         <div class="add-comment">
             <h2>افزودن دیدگاه</h2>
             <form action="" method="POST" class="add-comment-form">
                 {% csrf_token %}
                 <div>{{ comment_form.text }}</div>
-                <input type="submit" value="ارسال" class="btn primary-btn">
+                <input type="submit" value="ارسال دیدگاه" class="btn primary-btn">
             </form>
         </div>
     {% endif %}
     <div class="comments-container">
         {% for comment in comments %}
+            <hr>
             <div class="comment">
-                <div class="comment-body-container">
-                        <p class="comment-info">
-                            {{ comment.author.username }} در تاریخ {{ comment.date }}
-                        </p>
-                        <div class="comment-options">
-                            <a href="/comment-validation/{{ comment.id }}" class="btn edit-btn">تایید دیدگاه</a>
-                            <a href="/delete-comment/{{ comment.id }}" class="btn delete-btn">حذف دیدگاه</a>
-                        </div>
+                <div class="comment-info-container">
+                    <p class="comment-info">
+                        {{ comment.author.username }} در تاریخ {{ comment.date }}
+                    </p>
+                    <div class="comment-options">
+                        {% if not comment.is_valid %}
+                            <a href="/comment-validation/{{ comment.id }}" class="btn edit-btn"><i
+                                    class="fas fa-check"></i> تایید دیدگاه</a>
+                        {% endif %}
+                        <a href="/delete-comment/{{ comment.id }}" class="btn delete-btn"><i
+                                class="fas fa-trash-alt"></i> حذف دیدگاه</a>
+                    </div>
+                </div>
                 <p class="comment-body">
                     {{ comment.text }}
                 </p>
                 {% for reply in comment.replies.all %}
-                    <div class="comment-body-container">
-                        <p class="comment-info">
-                            {{ reply.author.username }} در تاریخ {{ reply.date }}
-                        </p>
-                        <div class="comment-options">
-                            <a href="/comment-validation/{{ reply.id }}" class="btn edit-btn">تایید دیگاه</a>
-                            <a href="/delete-comment/{{ reply.id }}" class="btn delete-btn">حذف دیگاه</a>
+                    <div class="reply-container">
+                        <div class="comment-info-container">
+                            <p class="comment-info">
+                                {{ reply.author.username }} در تاریخ {{ reply.date }}
+                            </p>
+                            <div class="comment-options">
+                                {% if not reply.is_valid %}
+                                    <a href="/comment-validation/{{ reply.id }}" class="btn edit-btn"><i
+                                            class="fas fa-check"></i> تایید پاسخ</a>
+                                {% endif %}
+                                <a href="/delete-comment/{{ reply.id }}" class="btn delete-btn"><i
+                                        class="fas fa-trash-alt"></i> حذف پاسخ</a>
+                            </div>
                         </div>
+                        <p>
+                            {{ reply.text }}
+                        </p>
                     </div>
-                    <p class="comment-body">
-                        {{ reply.text }}
-                    </p>
                 {% endfor %}
-                <h5>پاسخ</h5>
-                <form action="" method="POST">
-                    {% csrf_token %}
-                    {{ comment_form.as_p }}
-                    <input type="hidden" name="parent_id" value="{{ comment.id }}">
-                    <input type="submit" value="ارسال" class="btn primary-btn">
-                </form>
+                <div class="reply-form">
+                    <h3>پاسخ</h3>
+                    <form action="" method="POST" class="add-comment-form reply">
+                        {% csrf_token %}
+                        <div>{{ comment_form.text }}</div>
+                        <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                        <input type="submit" value="ارسال پاسخ" class="btn primary-btn">
+                    </form>
+                </div>
             </div>
         {% empty %}
-            <h2>هنوز دیدگاهی وجود ندارد</h2>
+            <h3 class="no-comments">هنوز دیدگاهی وجود ندارد</h3>
         {% endfor %}
     </div>
 {% endblock %}
