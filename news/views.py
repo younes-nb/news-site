@@ -69,8 +69,10 @@ def news_details_view(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     post.views += 1
     post.save()
-
-    comments = post.comments.filter(is_valid=True, parent__isnull=True)
+    # if request.user = a
+    #     comments = post.comments.filter(parent__isnull=True)
+    # else:
+    #     comments = post.comments.filter(is_valid=True, parent__isnull=True)
     if request.method == "POST":
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
@@ -100,12 +102,25 @@ def news_details_view(request, post_id):
     return render(request, "news/news-details.html", context)
 
 
-# @login_required
-# def comment_validation_view(request, post_id):
-#     post = get_object_or_404(Post, pk=post_id)
-#     if request.user == post.author:
-#         if request.method == "POST":
-#             comment_form = CommentValidationForm(request.POST)
+@login_required
+def comment_validation_view(request, comment_id):
+    comment = get_object_or_404(Comment, pk=comment_id)
+    if request.user == comment.post.author:
+        comment.is_valid = True
+        comment.save()
+        return redirect("/news-details/{}/".format(comment.post.id))
+    else:
+        return HttpResponseForbidden(request)
+
+
+@login_required
+def delete_comment_view(request, comment_id):
+    comment = get_object_or_404(Comment, pk=comment_id)
+    if request.user == comment.post.author:
+        comment.delete()
+        return redirect("/news-details/{}/".format(comment.post.id))
+    else:
+        return HttpResponseForbidden(request)
 
 
 @login_required

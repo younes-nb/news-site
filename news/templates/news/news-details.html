@@ -38,17 +38,28 @@
     <div class="comments-container">
         {% for comment in comments %}
             <div class="comment">
-                <p class="comment-info">
-                    {{ comment.author.username }} در تاریخ {{ comment.date }}
-                </p>
+                <div class="comment-body-container">
+                        <p class="comment-info">
+                            {{ comment.author.username }} در تاریخ {{ comment.date }}
+                        </p>
+                        <div class="comment-options">
+                            <a href="/comment-validation/{{ comment.id }}" class="btn edit-btn">تایید دیدگاه</a>
+                            <a href="/delete-comment/{{ comment.id }}" class="btn delete-btn">حذف دیدگاه</a>
+                        </div>
                 <p class="comment-body">
                     {{ comment.text }}
                 </p>
                 {% for reply in comment.replies.all %}
-                    <p class="comment-info">
-                        {{ reply.author.username }} در تاریخ {{ reply.date }}
-                    </p>
-                    <p class="comment-bodu">
+                    <div class="comment-body-container">
+                        <p class="comment-info">
+                            {{ reply.author.username }} در تاریخ {{ reply.date }}
+                        </p>
+                        <div class="comment-options">
+                            <a href="/comment-validation/{{ reply.id }}" class="btn edit-btn">تایید دیگاه</a>
+                            <a href="/delete-comment/{{ reply.id }}" class="btn delete-btn">حذف دیگاه</a>
+                        </div>
+                    </div>
+                    <p class="comment-body">
                         {{ reply.text }}
                     </p>
                 {% endfor %}

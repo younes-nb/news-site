@@ -8,5 +8,7 @@ urlpatterns = [
     path('news-details/<int:post_id>/', views.news_details_view),
     path('add-news/', views.add_news_view, name="add-news"),
     path('edit-news/<int:post_id>/', views.edit_news),
-    path('delete-news/<int:post_id>/', views.delete_news)
+    path('delete-news/<int:post_id>/', views.delete_news),
+    path('comment-validation/<int:comment_id>/', views.comment_validation_view),
+    path('delete-comment/<int:comment_id>/', views.delete_comment_view)
 ]
